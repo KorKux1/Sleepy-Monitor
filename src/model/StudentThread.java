@@ -48,8 +48,11 @@ public class StudentThread extends Thread   {
                     else {
                         chairs.acquire();
 
-                        System.out.printf("El monitor está atendiendo a un estudiante. Hay %x sillas disponibles.%nEl estudiante %x" +
-                                "toma una silla%n", chairs.availablePermits(), this.id);
+                        System.out.printf("El monitor está atendiendo a un estudiante. Hay %x sillas disponibles.%nEl estudiante %x " +
+                                "toma una silla%n", chairs.availablePermits()+1, this.id);
+
+                        System.out.printf("Sillas disponibles: %x%n", chairs.availablePermits());
+
 
                         monitor.acquire();
 
