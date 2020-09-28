@@ -30,7 +30,6 @@ public class Main {
                 attendThreads.add(attend);
                 attendThreads.get(i).start();
 
-                System.out.println("Iniciando...");
             }
 
         } catch (Exception e) {

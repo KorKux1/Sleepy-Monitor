@@ -49,7 +49,7 @@ public class StudentThread extends Thread   {
                         chairs.acquire();
 
                         System.out.printf("El monitor está atendiendo a un estudiante. Hay %x sillas disponibles.%nEl estudiante %x" +
-                                "toma una silla", chairs.availablePermits(), this.id);
+                                "toma una silla%n", chairs.availablePermits(), this.id);
 
                         monitor.acquire();
 
@@ -76,7 +76,7 @@ public class StudentThread extends Thread   {
 
                     monitor.acquire();
 
-                    System.out.printf("El monitor ayuda al estudiante con código %xn", this.id);
+                    System.out.printf("El monitor ayuda al estudiante con código %x%n", this.id);
 
 
                     int attendTime = generateMonitorAttendTime();
