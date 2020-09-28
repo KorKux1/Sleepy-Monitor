@@ -23,13 +23,11 @@ public class Main {
 
             Semaphore chairs = new Semaphore(StudentThread.CHAIRS, true);
 
-            Random randomSleep = new Random();
-
 
             ArrayList<StudentThread> attendThreads = new ArrayList<StudentThread>();
 
             for(int i = 0; i < StudentThread.STUDENTS_NUMBER; i++){
-                StudentThread attend = new StudentThread(i, monitor, chairs, randomSleep);
+                StudentThread attend = new StudentThread(i, monitor, chairs);
                 attendThreads.add(attend);
                 attendThreads.get(i).start();
 

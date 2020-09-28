@@ -21,19 +21,60 @@ public class StudentThread extends Thread   {
 
     private Semaphore chairs;
 
-    private Random randomSleep;
+    private Random random;
 
-    public StudentThread(int id, Semaphore monitor, Semaphore chairs, Random randomSleep) {
+    public StudentThread(int id, Semaphore monitor, Semaphore chairs) {
         this.id = id;
         this.monitor = monitor;
         this.chairs = chairs;
-        this.randomSleep = randomSleep;
+        this.random = new Random();
     }
 
     @Override
     public void run() {
-        
+        System.out.printf("El Estudiante con código %x ha entrado a la sala de cómputo%n", this.id);
 
+        while(true) {
+            try {
+                sleep(random.nextInt(10000));
+
+                System.out.printf("El estudiante %x entra a la oficina del monitor%n", this.id);
+
+                if (monitor.availablePermits() == 0){
+
+                }
+
+                else {
+                    System.out.printf("El monitor está dormido. El estudiante con código %x lo despierta %n", this.id);
+
+                    monitor.acquire();
+
+                    System.out.printf("El monitor ayuda al estudiante con código %xn", this.id);
+
+
+                    int attendTime = generateMonitorAttendTime();
+
+                    sleep(attendTime);
+
+                    monitor.release();
+
+                    System.out.printf("El monitor terminó de ayudar al estudiante con código %s%n", this.id);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    /**
+     * Gives the time that the monitor takes to attend a student. (Between 3 to 5 seconds)
+     * @return int: Time between 3 and 5 seconds.
+     */
+    public int generateMonitorAttendTime(){
+        return (random.nextInt(5-3) + 3) * 1000;
     }
 
 }
