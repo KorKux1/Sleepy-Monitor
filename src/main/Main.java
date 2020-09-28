@@ -3,7 +3,6 @@ package main;
 import model.StudentThread;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 

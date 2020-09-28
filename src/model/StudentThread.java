@@ -41,6 +41,33 @@ public class StudentThread extends Thread   {
                 System.out.printf("El estudiante %x entra a la oficina del monitor%n", this.id);
 
                 if (monitor.availablePermits() == 0){
+                    if (chairs.availablePermits() == 0){
+                        System.out.println("El monitor está atendiendo a un estudiando y las sillas en la sala de espera están ocupadas");
+                        System.out.printf("El estudiante con id %x se retira del lugar, volverá más tarde%n", this.id);
+                    }
+                    else {
+                        chairs.acquire();
+
+                        System.out.printf("El monitor está atendiendo a un estudiante. Hay %x sillas disponibles.%nEl estudiante %x" +
+                                "toma una silla", chairs.availablePermits(), this.id);
+
+                        monitor.acquire();
+
+                        chairs.release();
+
+                        System.out.printf("El estudiante %x es ayudado por el monitor%n", this.id);
+
+                        System.out.printf("Sillas disponibles: %x%n", chairs.availablePermits());
+
+                        int attendTime = generateMonitorAttendTime();
+
+                        sleep(attendTime);
+
+                        monitor.release();
+
+                        System.out.printf("El monitor terminó de ayudar al estudiante con código %s%n", this.id);
+
+                    }
 
                 }
 
